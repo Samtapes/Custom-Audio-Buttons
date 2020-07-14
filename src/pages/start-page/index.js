@@ -1,35 +1,40 @@
 import { StatusBar } from 'expo-status-bar';
-import React, { useState, useEffect } from 'react';
-import { View, Text, FlatList, TouchableHighlight, Modal, TextInput } from 'react-native';
+import React, { useState, useEffect, useRef } from 'react';
+import { View, Text, FlatList, TouchableHighlight, Modal, TextInput, Animated } from 'react-native';
 import styles from './styles.js';
 import { Audio } from 'expo-av';
 import * as DocumentPicker from 'expo-document-picker';
 import AsyncStorage from '@react-native-community/async-storage';
 
 
-// var BTNS = [
-  // {
-  //   id: "0",
-  //   title: "First Item",
-  //   audio: audio
-  // },
-// ];
+
+const FadeInView = (props) => {
+  const fadeAnim = useRef(new Animated.Value(0)).current  // Initial value for opacity: 0
+
+  React.useEffect(() => {
+    Animated.timing(
+      fadeAnim,
+      {
+        toValue: 1,
+        duration: 1000,
+        useNativeDriver: true,
+      }
+    ).start();
+  }, [fadeAnim])
+
+  return (
+    <Animated.View                 // Special animatable View
+      style={{
+        ...props.style,
+        opacity: fadeAnim,         // Bind opacity to animated value
+      }}
+    >
+      {props.children}
+    </Animated.View>
+  );
+}
 
 
-// async function checkStorage(){
-//   if(await AsyncStorage.getItem('BTNS') == null){
-//     console.log(null);
-    
-//     BTNS = [];
-//   }
-
-//   else{
-//     BTNS = JSON.parse(await AsyncStorage.getItem('BTNS'));
-//     console.log("Tem botoes criados");
-//   }
-// }
-
-// checkStorage();
 
 
 
@@ -176,6 +181,8 @@ const StartPage = () => {
     <View style={styles.container}>
       <StatusBar style="light" />
 
+      <FadeInView style={styles.container}>
+
       {/* Modal Criar novo botão */}
       <Modal
         animationType="fade"
@@ -313,6 +320,8 @@ const StartPage = () => {
         </View>
       </TouchableHighlight>
       </View>
+      </FadeInView>
+
 
     </View>
   );
