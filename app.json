@@ -4,6 +4,7 @@
     "slug": "Custom-Audio-Buttons",
     "version": "1.1.1",
     "orientation": "portrait",
+    "backgroundColor": "#000000",
     "icon": "./assets/icon.png",
     "splash": {
       "image": "./assets/splash.png",
