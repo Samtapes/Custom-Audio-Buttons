@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "Custom Audio Button",
-    "slug": "Custom-Audio-Button",
+    "name": "Custom Audio Buttons",
+    "slug": "Custom-Audio-Buttons",
     "version": "1.1.1",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
